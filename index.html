@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <!-- created header with title hangman -->
+    <header id="greeting">
+        <h1>Hangman live or die?</h1>
+    </header>
+    <main> 
+
+        <!-- create container that will output array of body parts when user guesses wrong letters -->
+        <section id="hangman-container">
+            <section id="body-parts">Bodyparts</section>
+        </section>
+
+        <section id="gallows-text"></section>
+        
+        <!-- have inputs for randomized word that user will guess if wrong then text of body part appears above -->
+        <section id="keyboard"></section>
+        <!-- if statement for when user chooses correct letter, otherwise non used letter is logged at bottom of page -->
+        <!-- user gets x amount of chances to guess word, depending on outcome give a win or loss message at end -->
+    </main>
+        
+    <script type="module" src="src/main.js"></script>
+</body>
+</html>
