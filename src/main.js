@@ -18,6 +18,8 @@ for(let i = 0; i < alphabet.length; i++) {
     
     makeKeyboard.classList.add('makingButtons');
     
+    let counter = 0;
+    let secondCounter = 0;
     // create addEventListener so when user clicks buttons console.log the alphabet array into the gallows section of html doc
     makeKeyboard.addEventListener('click', function(){
         for(let i = 0; i < letterInput; i++) {
@@ -26,10 +28,15 @@ for(let i = 0; i < alphabet.length; i++) {
             makeTextSpace.textContent = wordChoose;
             
             if(singleLetter === wordChoose) {
+                counter ++;
+                console.log(counter);
                 const fillIn = document.querySelectorAll('.hangmanText');
                 fillIn[i].textContent = singleLetter;
-            } else {
-            
+            } else if(singleLetter - 1 === i, counter <= 4){
+                secondCounter++;
+                let picture = document.getElementById('picture');
+                picture.src = 'assets/hangman' + 1 + '.png';
+
             }
             
             makeTextSpace.classList.add('showLetters');
@@ -53,24 +60,24 @@ for(let i = 0; i < wordChoices.length; i++) {
     
 }
 
-const imageArray = [
-    '.assets/octoboy.jpg',
-    '.assets/punguinboy.jpg',
-    '.assets/pickleboy.jpg',
-    '.assets/shrimpin.jpg'
-];
+// const imageArray = [
+//     './assets/hangman0.jpg',
+//     './assets/hangman1.jpg',
+//     './assets/hangman2.jpg',
+//     './assets/hangman3.jpg'
+// ];
 
-const myImage = document.getElementById('body-parts');
+// const myImage = document.getElementById('body-parts');
 
-for(let i = 0; i < imageArray.length; i++) {
-    let imageReveal = imageArray[i];
-    const showPics = document.createElement('span');
-    // showPics.value = imageReveal;
-    showPics.classList.add('hangmanImages');
+// for(let i = 0; i < imageArray.length; i++) {
+//     let imageReveal = imageArray[i];
+//     const showPics = document.createElement('span');
+//     // showPics.value = imageReveal;
+//     showPics.classList.add('hangmanImages');
 
-    myImage.appendChild(imageReveal);
+//     myImage.appendChild(imageReveal);
      
-}
+// }
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -78,12 +85,3 @@ function getRandomIntInclusive(min, max) {
     // both min and max are inclusive
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
-
-
-// let imageIndex = 0;
-
-// function changeImage(){
-//     myImage.setAttribute('src', imageArray[imageIndex]);
-//     imageIndex = (imageIndex + 1) % imageArray.length;
-// }
