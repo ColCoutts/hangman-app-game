@@ -5,6 +5,7 @@ import randomHangmanWords from './hangmanwords.js';
 const keyboardAlpha = document.getElementById('keyboard');
 const gallowTextAppear = document.getElementById('gallows-text');
 const letterInput = alphabet.length;
+const pictureSwap = document.getElementById('picture');
 
 // const wordSource = randomHangmanWords.length;
 const wordPicker = getRandomIntInclusive(0, randomHangmanWords.length - 1); //have this explained to you essentially its a function rather than the math random being combined with randomword list to show the text in galley window 
@@ -17,29 +18,33 @@ for(let i = 0; i < alphabet.length; i++) {
     makeKeyboard.textContent = singleLetter;
     
     makeKeyboard.classList.add('makingButtons');
-    
-    let counter = 0;
-    let secondCounter = 0;
+
+    let winCommand = document.getElementById('result-display');
+    let loseCommand = document.getElementById('result-display');
+
     // create addEventListener so when user clicks buttons console.log the alphabet array into the gallows section of html doc
-    makeKeyboard.addEventListener('click', function(){
+    makeKeyboard.addEventListener('click', function(event){
+        event.preventDefault();
+        let imageSource = '';
+        
         for(let i = 0; i < letterInput; i++) {
             let wordChoose = wordChoices[i];
-            const makeTextSpace = document.createElement('span');
-            makeTextSpace.textContent = wordChoose;
-            
+            // get click to recognize right or wrong choice
             if(singleLetter === wordChoose) {
-                counter ++;
-                console.log(counter);
                 const fillIn = document.querySelectorAll('.hangmanText');
                 fillIn[i].textContent = singleLetter;
-            } else if(singleLetter - 1 === i, counter <= 4){
-                secondCounter++;
-                let picture = document.getElementById('picture');
-                picture.src = 'assets/hangman' + 1 + '.png';
-
+                winCommand.textContent = 'you win';
+                console.log(winCommand);
+                imageSource = '../assets/hangman1.png';
+                break;
+            } else {
+                imageSource = '../assets/hangman1.png';
+                loseCommand.textContent = 'not quite';
             }
             
-            makeTextSpace.classList.add('showLetters');
+            pictureSwap.src = imageSource;
+
+            // makeTextSpace.classList.add('showLetters');
             
             // gallowTextAppear.appendChild(makeTextSpace);
         }
@@ -49,7 +54,6 @@ for(let i = 0; i < alphabet.length; i++) {
     
 }
 
-//create a randomized for loop for choosing from hangman wordlist upon refresh
 for(let i = 0; i < wordChoices.length; i++) {
     const showWords = document.createElement('span');
     
@@ -59,25 +63,6 @@ for(let i = 0; i < wordChoices.length; i++) {
     gallowTextAppear.appendChild(showWords);
     
 }
-
-// const imageArray = [
-//     './assets/hangman0.jpg',
-//     './assets/hangman1.jpg',
-//     './assets/hangman2.jpg',
-//     './assets/hangman3.jpg'
-// ];
-
-// const myImage = document.getElementById('body-parts');
-
-// for(let i = 0; i < imageArray.length; i++) {
-//     let imageReveal = imageArray[i];
-//     const showPics = document.createElement('span');
-//     // showPics.value = imageReveal;
-//     showPics.classList.add('hangmanImages');
-
-//     myImage.appendChild(imageReveal);
-     
-// }
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
