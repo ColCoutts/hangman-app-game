@@ -4,8 +4,6 @@ import randomHangmanWords from './hangmanwords.js';
 // make buttons rows that will use the alphabet array text appear on screen
 const keyboardAlpha = document.getElementById('keyboard');
 const gallowTextAppear = document.getElementById('gallows-text');
-const letterInput = alphabet.length;
-const pictureSwap = document.getElementById('picture');
 
 // const wordSource = randomHangmanWords.length;
 const wordPicker = getRandomIntInclusive(0, randomHangmanWords.length - 1); //have this explained to you essentially its a function rather than the math random being combined with randomword list to show the text in galley window 
@@ -22,28 +20,26 @@ for(let i = 0; i < alphabet.length; i++) {
     let winCommand = document.getElementById('result-display');
     let loseCommand = document.getElementById('result-display');
 
+    let counter = 0;
     // create addEventListener so when user clicks buttons console.log the alphabet array into the gallows section of html doc
     makeKeyboard.addEventListener('click', function(event){
         event.preventDefault();
+        counter++;
         let imageSource = '';
         
-        for(let i = 0; i < letterInput; i++) {
-            let wordChoose = wordChoices[i];
+        for(let i = 0; i < wordChoices.length; i++) {
+            const wordChoose = wordChoices[i];
             // get click to recognize right or wrong choice
             if(singleLetter === wordChoose) {
                 const fillIn = document.querySelectorAll('.hangmanText');
                 fillIn[i].textContent = singleLetter;
                 winCommand.textContent = 'you win';
-                console.log(winCommand);
-                imageSource = '../assets/hangman1.png';
-                break;
-            } else {
-                imageSource = '../assets/hangman1.png';
+                imageSource = './assets/hangman0.png';
+            } else if(singleLetter !== wordChoose) {
+                imageSource = '../assets/hangman' + counter + '.png';
                 loseCommand.textContent = 'not quite';
+                counter++;
             }
-            
-            pictureSwap.src = imageSource;
-
             // makeTextSpace.classList.add('showLetters');
             
             // gallowTextAppear.appendChild(makeTextSpace);
