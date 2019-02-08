@@ -4,11 +4,19 @@
     height: 75px;
 }
 
+.makingButtons {
+    background: lightgoldenrodyellow;
+    color: grey;
+}
 
 #hangman-container {
     background: goldenrod;
     width: 300px;
     height: 300px;
+}
+
+.hangmanText {
+    border: 2px solid black;
 }
 
 #picture {

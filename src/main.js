@@ -10,46 +10,6 @@ const wordPicker = getRandomIntInclusive(0, randomHangmanWords.length - 1); //ha
 const wordChoices = randomHangmanWords[wordPicker]; //wordpicker is function to randomly call integer (a string in this case) from the random words array
 // have explained why you can use [] randomHangmanWords, its most likely becuase randomhangmanwords is an array
 
-for(let i = 0; i < alphabet.length; i++) {
-    let singleLetter = alphabet[i];
-    const makeKeyboard = document.createElement('button');
-    makeKeyboard.textContent = singleLetter;
-    
-    makeKeyboard.classList.add('makingButtons');
-
-    let winCommand = document.getElementById('result-display');
-    let loseCommand = document.getElementById('result-display');
-
-    let counter = 0;
-    // create addEventListener so when user clicks buttons console.log the alphabet array into the gallows section of html doc
-    makeKeyboard.addEventListener('click', function(event){
-        event.preventDefault();
-        counter++;
-        let imageSource = '';
-        
-        for(let i = 0; i < wordChoices.length; i++) {
-            const wordChoose = wordChoices[i];
-            // get click to recognize right or wrong choice
-            if(singleLetter === wordChoose) {
-                const fillIn = document.querySelectorAll('.hangmanText');
-                fillIn[i].textContent = singleLetter;
-                winCommand.textContent = 'you win';
-                imageSource = './assets/hangman0.png';
-            } else if(singleLetter !== wordChoose) {
-                imageSource = '../assets/hangman' + counter + '.png';
-                loseCommand.textContent = 'not quite';
-                counter++;
-            }
-            // makeTextSpace.classList.add('showLetters');
-            
-            // gallowTextAppear.appendChild(makeTextSpace);
-        }
-    });
-    
-    keyboardAlpha.appendChild(makeKeyboard);
-    
-}
-
 for(let i = 0; i < wordChoices.length; i++) {
     const showWords = document.createElement('span');
     
@@ -59,6 +19,47 @@ for(let i = 0; i < wordChoices.length; i++) {
     gallowTextAppear.appendChild(showWords);
     
 }
+
+for(let i = 0; i < alphabet.length; i++) {
+    //lines 15-18 create rows of buttons
+    let singleLetter = alphabet[i];
+    const makeKeyboard = document.createElement('button');
+    makeKeyboard.textContent = singleLetter;
+    makeKeyboard.classList.add('makingButtons');
+
+    let winCommand = document.getElementById('result-display');
+    // let loseCommand = document.getElementById('result-display');
+
+    
+    let counter = 0;
+    // create addEventListener so when user clicks buttons console.log the alphabet array into the gallows section of html doc
+    makeKeyboard.addEventListener('click', function(event){
+        event.preventDefault();
+        // let imageSource = '';
+        
+        for(let i = 0; i < wordChoices.length; i++) {
+            const wordChoose = wordChoices[i];
+            // console.log(wordChoose);
+            // get click to recognize right or wrong choice
+            if(singleLetter === wordChoose) {
+                const fillIn = document.querySelectorAll('.hangmanText');
+                fillIn[i].textContent = singleLetter;
+                winCommand.textContent = 'you win';
+                console.log(winCommand);
+            } else {
+                
+                // imageSource = '../assets/hangman' + counter + '.png';
+                // loseCommand.textContent = 'not quite';
+            }
+            // makeTextSpace.classList.add('showLetters');
+            
+            // gallowTextAppear.appendChild(makeTextSpace);
+        }
+    });
+    
+    keyboardAlpha.appendChild(makeKeyboard);
+}
+
 
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
